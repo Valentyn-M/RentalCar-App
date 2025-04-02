@@ -56,7 +56,7 @@ const CarFilter = () => {
           </Field>
 
           <label className={s.label} htmlFor="mileageFrom">
-            Сar mileage / km
+            Car mileage / km
           </label>
           <Field className={s.inputText} type="text" name="mileageFrom" id="mileageFrom" placeholder="From" />
 
