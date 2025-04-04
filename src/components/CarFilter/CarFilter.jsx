@@ -4,8 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchCarBrands } from '../../store/carBrands/operations';
 import { selectCarBrands } from '../../store/carBrands/selectors';
+import { setFilters } from '../../store/filters/slice';
+import { resetCurrentPage, resetItems } from '../../store/cars/slice';
 
 const CarFilter = () => {
+  const carBrands = useSelector(selectCarBrands);
+
+  const dispatch = useDispatch();
+
   const initialValues = {
     brand: '',
     price: '',
@@ -14,18 +20,16 @@ const CarFilter = () => {
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
+    dispatch(resetItems());
+    dispatch(resetCurrentPage());
+    dispatch(setFilters(values));
   };
 
   const priceOptions = [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
 
-  const carBrands = useSelector(selectCarBrands);
-
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchCarBrands());
-  });
+  }, [dispatch]);
 
   return (
     <div className={s.carFilter}>
