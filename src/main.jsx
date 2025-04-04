@@ -6,13 +6,16 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Provider } from 'react-redux';
 import { store } from './store/store.js';
+import { SnackbarProvider } from 'notistack';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <HelmetProvider>
-          <App />
+          <SnackbarProvider autoHideDuration={4000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            <App />
+          </SnackbarProvider>
         </HelmetProvider>
       </BrowserRouter>
     </Provider>

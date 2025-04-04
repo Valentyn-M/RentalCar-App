@@ -9,12 +9,15 @@ import CarItem from '../CarItem/CarItem';
 import Button from '../Button/Button';
 import { useSearchParams } from 'react-router-dom';
 import { setFilters } from '../../store/filters/slice';
+import { useSnackbar } from 'notistack';
 
 const CarList = () => {
   const cars = useSelector(selectCars);
   const filters = useSelector(selectFilters);
   const currentPage = useSelector(selectCurrentPage);
   const totalPages = useSelector(selectTotalPages);
+
+  const { enqueueSnackbar } = useSnackbar();
 
   const dispatch = useDispatch();
 
@@ -43,6 +46,9 @@ const CarList = () => {
 
   const handleClick = () => {
     if (currentPage < totalPages) {
+      if (totalPages - currentPage === 1) {
+        enqueueSnackbar('All available cars are loaded', { variant: 'info' });
+      }
       dispatch(setCurrentPage());
     }
   };
