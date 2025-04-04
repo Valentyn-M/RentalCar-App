@@ -1,10 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import s from './CarList.module.css';
 import { selectCars, selectCurrentPage, selectTotalPages } from '../../store/cars/selectors';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchCars } from '../../store/cars/operations';
 import { selectFilters } from '../../store/filters/selectors';
 import { setCurrentPage } from '../../store/cars/slice';
+import CarItem from '../CarItem/CarItem';
+import Button from '../Button/Button';
+import { useSearchParams } from 'react-router-dom';
+import { setFilters } from '../../store/filters/slice';
 
 const CarList = () => {
   const cars = useSelector(selectCars);
@@ -14,9 +18,28 @@ const CarList = () => {
 
   const dispatch = useDispatch();
 
+  const [searchParams] = useSearchParams();
+  const [filtersInitialized, setFiltersInitialized] = useState(false);
+
+  // Get filters from URL
   useEffect(() => {
-    dispatch(fetchCars(filters));
-  }, [dispatch, filters, currentPage]);
+    const initialFilters = {
+      brand: searchParams.get('brand') || '',
+      price: searchParams.get('price') || '',
+      mileageFrom: searchParams.get('mileageFrom') || '',
+      mileageTo: searchParams.get('mileageTo') || '',
+    };
+
+    dispatch(setFilters(initialFilters));
+    setFiltersInitialized(true);
+  }, [dispatch, searchParams]);
+
+  // Load cars after the filters have been set
+  useEffect(() => {
+    if (filtersInitialized) {
+      dispatch(fetchCars(filters));
+    }
+  }, [dispatch, filters, currentPage, filtersInitialized]);
 
   const handleClick = () => {
     if (currentPage < totalPages) {
@@ -28,12 +51,10 @@ const CarList = () => {
     <div className={s.carList}>
       <ul>
         {cars.map((car) => (
-          <li key={car.id}>{car.brand}</li>
+          <CarItem key={car.id} data={car} />
         ))}
       </ul>
-      <button className={s.btn} type="button" onClick={handleClick}>
-        Load more
-      </button>
+      {currentPage < totalPages && <Button onClick={handleClick}>Load more</Button>}
     </div>
   );
 };

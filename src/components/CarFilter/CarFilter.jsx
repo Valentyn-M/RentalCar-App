@@ -6,25 +6,37 @@ import { fetchCarBrands } from '../../store/carBrands/operations';
 import { selectCarBrands } from '../../store/carBrands/selectors';
 import { setFilters } from '../../store/filters/slice';
 import { resetCurrentPage, resetItems } from '../../store/cars/slice';
+import Button from '../Button/Button';
+import { useSearchParams } from 'react-router-dom';
 
 const CarFilter = () => {
   const carBrands = useSelector(selectCarBrands);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const dispatch = useDispatch();
 
   const initialValues = {
-    brand: '',
-    price: '',
-    mileageFrom: '',
-    mileageTo: '',
+    brand: searchParams.get('brand') || '',
+    price: searchParams.get('price') || '',
+    mileageFrom: searchParams.get('mileageFrom') || '',
+    mileageTo: searchParams.get('mileageTo') || '',
   };
 
   const handleSubmit = (values) => {
     dispatch(resetItems());
     dispatch(resetCurrentPage());
     dispatch(setFilters(values));
+
+    const filteredParams = {};
+    if (values.brand) filteredParams.brand = values.brand;
+    if (values.price) filteredParams.price = values.price;
+    if (values.mileageFrom) filteredParams.mileageFrom = values.mileageFrom;
+    if (values.mileageTo) filteredParams.mileageTo = values.mileageTo;
+    setSearchParams(filteredParams);
   };
 
+  // The backend returns incorrect records starting from the value 80
   const priceOptions = [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
 
   useEffect(() => {
@@ -69,9 +81,7 @@ const CarFilter = () => {
           </label>
           <Field className={s.inputText} type="text" name="mileageTo" id="mileageTo" placeholder="To" />
 
-          <button className={s.button} type="submit">
-            Search
-          </button>
+          <Button type={'submit'}>Search</Button>
         </Form>
       </Formik>
     </div>
