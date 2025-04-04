@@ -3,10 +3,11 @@ import BtnAsLink from '../BtnAsLink/BtnAsLink';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrRemoveFavorite } from '../../store/favorites/slice';
 import { selectFavorites } from '../../store/favorites/selectors';
+import clsx from 'clsx';
 
-const CarItem = ({
-  data: { img, description, brand, model, year, rentalPrice, address, rentalCompany, type, mileage, id },
-}) => {
+const CarItem = ({ carData }) => {
+  const { img, description, brand, model, year, rentalPrice, address, rentalCompany, type, mileage, id } = carData;
+
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
   const isfavorite = favorites.includes(id);
@@ -21,18 +22,22 @@ const CarItem = ({
     dispatch(addOrRemoveFavorite(id));
   };
 
+  // TODO loader
+
   return (
     <li className={s.carItem}>
       <svg className={s.icon} onClick={handleClick}>
         {isfavorite ? <use href={`${svgIcon}#icon-heart-active`} /> : <use href={`${svgIcon}#icon-heart-default`} />}
       </svg>
-      <img className={s.image} src={img} alt={description} width="335" height="268" />
+      <div className={s.imageWrap}>
+        <img className={s.image} src={img} alt={description} width="335" height="268" />
+      </div>
       <div className={s.titleWrap}>
-        <div className={s.mainDetailsWrap}>
-          <p className={s.brand}>{brand}</p>
-          <p className={s.model}>{model}</p>
-          <p className={s.year}>{year}</p>
-        </div>
+        <p className={s.mainDetailsWrap}>
+          <span className={s.brand}>{brand} </span>
+          <span className={clsx(s.model, 'primary-color')}>{model}, </span>
+          <span className={s.year}>{year}</span>
+        </p>
         <p className={s.price}>{rentalPrice}</p>
       </div>
       <div className={s.detailsWrap}>
