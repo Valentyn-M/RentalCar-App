@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from 'formik';
-import s from './CarFilter.module.css';
+import s from './CarFilter.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchCarBrands } from '../../store/carBrands/operations';
@@ -44,7 +44,7 @@ const CarFilter = () => {
   }, [dispatch]);
 
   return (
-    <div className={s.carFilter}>
+    <section className={s.carFilter}>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form className={s.form}>
           <label className={s.label} htmlFor="brand">
@@ -84,7 +84,7 @@ const CarFilter = () => {
           <Button type={'submit'}>Search</Button>
         </Form>
       </Formik>
-    </div>
+    </section>
   );
 };
 

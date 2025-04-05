@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import s from './BtnAsLink.module.css';
+import s from './BtnAsLink.module.scss';
 
 const BtnAsLink = ({ adress, children, ...rest }) => {
   return (

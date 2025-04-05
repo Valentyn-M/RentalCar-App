@@ -1,0 +1,25 @@
+.container {
+  max-width: rem(1230);
+  padding: 0 rem(15);
+  margin: 0 auto;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: rem(4);
+}
+
+.header {
+  background: var(--badges);
+  height: rem(60);
+  flex-shrink: 0;
+
+  @media (min-width: rem(480)) {
+    height: rem(68);
+  }
+}
+
+.main {
+}

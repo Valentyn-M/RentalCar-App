@@ -1,0 +1,91 @@
+.hero {
+  background-image: url('/src/images/main-img.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: calc(100vh - rem(64));
+  min-height: rem(400);
+  position: relative;
+
+  @media (min-width: rem(480)) {
+    height: calc(100vh - rem(72));
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+    background-image: url('/src/images/main-img_2x.jpg');
+  }
+}
+
+.heroWrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: rem(60) rem(30);
+  position: relative;
+  z-index: 1;
+  color: var(--white);
+
+  @media (min-width: rem(480)) {
+    padding: rem(60) rem(40);
+  }
+
+  @media (min-width: rem(768)) {
+    padding: rem(60) rem(50);
+  }
+
+  @media (min-width: rem(1024)) {
+    padding: rem(60);
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: rem(36);
+  line-height: 1.2;
+  text-align: center;
+  &:not(:last-child) {
+    margin-bottom: rem(16);
+  }
+
+  @media (min-width: rem(480)) {
+    font-size: rem(42);
+  }
+
+  @media (min-width: rem(768)) {
+    font-size: rem(48);
+  }
+
+  @media (min-width: rem(1024)) {
+    font-size: rem(60);
+  }
+}
+
+.text {
+  font-weight: 600;
+  font-size: rem(20);
+  line-height: 1.33333;
+  text-align: center;
+  &:not(:last-child) {
+    margin-bottom: rem(40);
+  }
+
+  @media (min-width: rem(768)) {
+    font-size: rem(22);
+  }
+
+  @media (min-width: rem(1024)) {
+    font-size: rem(24);
+  }
+}

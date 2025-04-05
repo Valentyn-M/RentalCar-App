@@ -54,14 +54,14 @@ const CarList = () => {
   };
 
   return (
-    <div className={s.carList}>
+    <section className={s.carList}>
       <ul>
         {cars.map((car) => (
           <CarItem key={car.id} carData={car} />
         ))}
       </ul>
       {currentPage < totalPages && <Button onClick={handleClick}>Load more</Button>}
-    </div>
+    </section>
   );
 };
 

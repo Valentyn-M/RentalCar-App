@@ -1,0 +1,36 @@
+.nav,
+.list,
+.item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.list {
+  gap: rem(24);
+
+  @media (min-width: rem(480)) {
+    gap: rem(32);
+  }
+}
+
+.link {
+  height: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      color: var(--button-hover);
+    }
+  }
+  &:focus {
+    color: var(--button-hover);
+  }
+
+  &.active {
+    color: var(--button-hover);
+  }
+}

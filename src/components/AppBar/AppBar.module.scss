@@ -1,0 +1,23 @@
+.navWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.navHome,
+.linkHome {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkHome {
+  height: 85%;
+}
+
+.iconLogo {
+  width: rem(102);
+  height: rem(16);
+}
