@@ -1,12 +1,78 @@
-# React + Vite
+# 🚗 RentalCar App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![RentalCar Preview](./preview.jpg)
 
-Currently, two official plugins are available:
+## 📋 Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**RentalCar** is a modern and responsive car rental web app that allows users to browse, filter, and book cars easily. It is built with React and includes smooth animations, form validation, and a clean design.
 
-## Expanding the ESLint configuration
+## 🔧 Key Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 📚 Car catalog with pagination
+- 🔍 Filtering by brand, price, mileage
+- 🔽 Custom **MUI Select** dropdowns styled to match the design
+- 🔄 Animated loader styled as a spinning wheel
+- ℹ️ Detailed car pages with specifications
+- 📆 Booking form with custom **MUI Date Picker**
+- 🌐 Routing via React Router
+- ⚙️ State management using Redux Toolkit
+- ✅ Form validation with Formik & Yup
+- 🎨 Modular styles with SCSS (CSS Modules)
+- 📦 Deployment-ready (Vercel)
+
+## 🛠 Tech Stack
+
+- React + Vite
+- Redux Toolkit
+- React Router
+- MUI (Date Picker, Select)
+- Formik + Yup
+- SCSS Modules
+- Notistack (Toast notifications)
+- Vercel
+
+## ⚙️ Installation Guide
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/Valentyn-M/RentalCar-App.git
+   cd RentalCar-App
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+## 📁 Project Structure
+
+### 🗂️ Project Structure
+
+```bash
+src/
+├── components/        # Reusable components (UI, Layout, Features)
+├── images/            # Main background images
+├── pages/             # Application pages (Home, Catalog, Car Details)
+├── store/             # Redux slices, async operations, selectors
+├── styles/            # Global SCSS variables and base styles
+├── App.jsx            # Root component with routing
+├── App.scss           # Root styles
+├── DocumentTitle.jsx  # Utility for setting document titles
+├── Layout.jsx         # Page layout wrapper
+├── main.jsx           # Entry point
+public/
+├── favicon.svg        # App favicon
+├── sprite.svg         # Sprite icons (used by SvgArrowIcon, etc.)
+```
+
+## 👨‍💻 Author
+
+**Valentyn Mostovyi**  
+[GitHub → Valentyn-M](https://github.com/Valentyn-M)
