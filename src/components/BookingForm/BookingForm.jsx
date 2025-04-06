@@ -4,8 +4,6 @@ import { useRef } from 'react';
 import { useSnackbar } from 'notistack';
 import clsx from 'clsx';
 import s from './BookingForm.module.scss';
-
-// Импорты для DatePicker
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -17,7 +15,7 @@ const BookingForm = () => {
   const initialValues = {
     name: '',
     email: '',
-    date: null, // для DatePicker нужно значение null, а не ''
+    date: null, // DatePicker needs null value, not ''
     comment: '',
   };
 
@@ -44,11 +42,13 @@ const BookingForm = () => {
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
           {({ values, setFieldValue, errors, touched }) => (
             <Form className={s.form}>
+              {/* Name */}
               <label className={s.label} htmlFor="name">
                 <Field className={s.field} type="text" name="name" id="name" placeholder="Name*" />
                 {touched.name && errors.name && <span className={s.error}>{errors.name}</span>}
               </label>
 
+              {/* Email */}
               <label className={s.label} htmlFor="email">
                 <Field className={s.field} type="email" name="email" id="email" placeholder="Email*" />
                 {touched.email && errors.email && <span className={s.error}>{errors.email}</span>}
@@ -78,6 +78,7 @@ const BookingForm = () => {
                 }}
               />
 
+              {/* Comment */}
               <label className={s.label} htmlFor="comment">
                 <Field
                   as="textarea"
