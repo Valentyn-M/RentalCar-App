@@ -1,5 +1,9 @@
 .carFilter {
-  margin-bottom: rem(56);
+  margin-bottom: rem(48);
+
+  @media (min-width: rem(890)) {
+    margin-bottom: rem(56);
+  }
 }
 
 .form {

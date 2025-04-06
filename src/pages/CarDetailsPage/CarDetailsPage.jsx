@@ -1,4 +1,4 @@
-import s from './CarDetailsPage.module.css';
+import s from './CarDetailsPage.module.scss';
 import DocumentTitle from '../../components/DocumentTitle';
 import BookingForm from '../../components/BookingForm/BookingForm';
 import CarInfoBlock from '../../components/CarInfoBlock/CarInfoBlock';
@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { fetchCarDetails } from '../../store/carDetails/operations';
 import { useParams } from 'react-router-dom';
 import CarDetailsSections from '../../components/CarFeatures/CarFeatures';
+import clsx from 'clsx';
 
 const CarDetailsPage = () => {
   const { carId } = useParams();
@@ -28,12 +29,16 @@ const CarDetailsPage = () => {
   const imageId = img.match(/\/(\d+)-/)[1];
 
   return (
-    <div>
+    <div className={clsx(s.carDetailsPage, 'container')}>
       <DocumentTitle>RentalCar | Car Details</DocumentTitle>
-      <img className={s.image} src={img} alt={description} width="640" height="512" />
-      <BookingForm />
-      <CarInfoBlock carDetails={carDetails} shortId={imageId} />
-      <CarDetailsSections carDetails={carDetails} />
+      <div className={clsx(s.block, s.left)}>
+        <img className={s.image} src={img} alt={description} width="740" height="592" />
+        <BookingForm />
+      </div>
+      <div className={clsx(s.block, s.right)}>
+        <CarInfoBlock carDetails={carDetails} shortId={imageId} />
+        <CarDetailsSections carDetails={carDetails} />
+      </div>
     </div>
   );
 };

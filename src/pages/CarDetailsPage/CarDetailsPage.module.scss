@@ -1,0 +1,40 @@
+.carDetailsPage {
+  padding-top: rem(52);
+  padding-bottom: rem(52);
+
+  @media (min-width: rem(480)) {
+    padding-top: rem(64);
+    padding-bottom: rem(64);
+  }
+
+  @media (min-width: rem(768)) {
+    padding-top: rem(80);
+    padding-bottom: rem(80);
+    display: flex;
+    gap: rem(48);
+  }
+
+  @media (min-width: rem(1024)) {
+    gap: rem(72);
+  }
+}
+
+.left {
+  flex-basis: rem(640);
+  margin-bottom: rem(52);
+
+  @media (min-width: rem(480)) {
+    margin-bottom: rem(64);
+  }
+}
+
+.right {
+  flex-basis: rem(488);
+}
+
+.image {
+  border-radius: rem(19);
+  &:not(:last-child) {
+    margin-bottom: rem(40);
+  }
+}

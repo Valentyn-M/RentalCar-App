@@ -1,9 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import s from './BookingForm.module.css';
+import s from './BookingForm.module.scss';
 import * as Yup from 'yup';
-import Button from '../Button/Button';
 import { useRef } from 'react';
 import { useSnackbar } from 'notistack';
+import clsx from 'clsx';
 
 const BookingForm = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -37,33 +37,39 @@ const BookingForm = () => {
   });
 
   return (
-    <div className={s.bookingForm}>
+    <section className={s.bookingForm}>
       <h3 className={s.title}>Book your car now</h3>
       <p className={s.text}>Stay connected! We are always ready to help you.</p>
       <Formik initialValues={initialValues} onSubmit={handlSubmit} validationSchema={validationSchema}>
-        <Form>
+        <Form className={s.form}>
           <label className={s.label} htmlFor="name">
-            <Field className={s.input} type="text" name="name" id="name" placeholder="Name*" />
+            <Field className={s.field} type="text" name="name" id="name" placeholder="Name*" />
             <ErrorMessage className={s.error} name="name" component="span" />
           </label>
           <label className={s.label} htmlFor="email">
-            <Field className={s.input} type="email" name="email" id="email" placeholder="Email*" />
+            <Field className={s.field} type="email" name="email" id="email" placeholder="Email*" />
             <ErrorMessage className={s.error} name="email" component="span" />
           </label>
           <label className={s.label} htmlFor="date">
-            <Field className={s.input} type="text" name="date" id="date" placeholder="Booking date*" />
+            <Field className={s.field} type="text" name="date" id="date" placeholder="Booking date*" />
             <ErrorMessage className={s.error} name="date" component="span" />
           </label>
           <label className={s.label} htmlFor="comment">
-            <Field className={s.input} type="text" name="comment" id="comment" placeholder="Comment" />
+            <Field
+              as="textarea"
+              className={clsx(s.field, s.textarea)}
+              name="comment"
+              id="comment"
+              placeholder="Comment"
+            />
             <ErrorMessage className={s.error} name="comment" component="span" />
           </label>
-          <Button type={'submit'} ref={btnRef}>
+          <button type="submit" className={clsx(s.button, 'mainBtn')} ref={btnRef}>
             Send
-          </Button>
+          </button>
         </Form>
       </Formik>
-    </div>
+    </section>
   );
 };
 

@@ -1,4 +1,4 @@
-import s from './CarFeatures.module.css';
+import s from './CarFeatures.module.scss';
 
 const CarDetailsSections = ({ carDetails }) => {
   const { rentalConditions, year, type, fuelConsumption, engineSize, accessories, functionalities } = carDetails;
@@ -8,6 +8,7 @@ const CarDetailsSections = ({ carDetails }) => {
 
   return (
     <section className={s.carDetailsSections}>
+      <h2 className="visually-hidden">More information about a rental car</h2>
       <div className={s.block}>
         <h3 className={s.title}>Rental Conditions:</h3>
         <ul className={s.list}>

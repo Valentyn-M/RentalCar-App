@@ -1,4 +1,14 @@
 .carCatalogPage {
-  padding-top: rem(80);
-  padding-bottom: rem(80);
+  padding-top: rem(52);
+  padding-bottom: rem(52);
+
+  @media (min-width: rem(590)) {
+    padding-top: rem(64);
+    padding-bottom: rem(64);
+  }
+
+  @media (min-width: rem(890)) {
+    padding-top: rem(80);
+    padding-bottom: rem(80);
+  }
 }

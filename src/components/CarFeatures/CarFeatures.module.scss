@@ -1,0 +1,43 @@
+.carDetailsSections {
+  display: flex;
+  flex-direction: column;
+  gap: rem(52);
+
+  @media (min-width: rem(480)) {
+    gap: rem(64);
+  }
+
+  @media (min-width: rem(768)) {
+    gap: rem(68);
+  }
+
+  @media (min-width: rem(1024)) {
+    gap: rem(110);
+  }
+}
+
+.title {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: rem(20);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+}
+
+.item {
+  display: flex;
+  gap: rem(8);
+}
+
+.icon {
+  width: rem(16);
+  height: rem(16);
+  flex-shrink: 0;
+  position: relative;
+  top: em(2, 16);
+}

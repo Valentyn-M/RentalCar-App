@@ -1,9 +1,9 @@
-import s from './CarItem.module.css';
-import BtnAsLink from '../BtnAsLink/BtnAsLink';
+import s from './CarItem.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrRemoveFavorite } from '../../store/favorites/slice';
 import { selectFavorites } from '../../store/favorites/selectors';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
 const CarItem = ({ carData }) => {
   const { img, description, brand, model, year, rentalPrice, address, rentalCompany, type, mileage, id } = carData;
@@ -16,6 +16,8 @@ const CarItem = ({ carData }) => {
   const city = addressParts[addressParts.length - 2];
   const country = addressParts[addressParts.length - 1];
 
+  const mileageFormatted = mileage.toLocaleString('fr-FR');
+
   const svgIcon = '/sprite.svg';
 
   const handleClick = () => {
@@ -26,10 +28,10 @@ const CarItem = ({ carData }) => {
 
   return (
     <li className={s.carItem}>
-      <svg className={s.icon} onClick={handleClick}>
-        {isfavorite ? <use href={`${svgIcon}#icon-heart-active`} /> : <use href={`${svgIcon}#icon-heart-default`} />}
-      </svg>
       <div className={s.imageWrap}>
+        <svg className={clsx(s.icon, isfavorite && s.active)} onClick={handleClick}>
+          {isfavorite ? <use href={`${svgIcon}#icon-heart-active`} /> : <use href={`${svgIcon}#icon-heart-default`} />}
+        </svg>
         <img className={s.image} src={img} alt={description} width="335" height="268" />
       </div>
       <div className={s.titleWrap}>
@@ -38,18 +40,22 @@ const CarItem = ({ carData }) => {
           <span className={clsx(s.model, 'primary-color')}>{model}, </span>
           <span className={s.year}>{year}</span>
         </p>
-        <p className={s.price}>{rentalPrice}</p>
+        <p className={s.price}>${rentalPrice}</p>
       </div>
       <div className={s.detailsWrap}>
-        <p className={s.city}>{city}</p>
-        <p className={s.country}>{country}</p>
-        <p className={s.company}>{rentalCompany}</p>
+        <p className={s.detailItem}>{city}</p>
+        <p className={s.detailItem}>{country}</p>
+        <p className={s.detailItem}>{rentalCompany}</p>
       </div>
-      <div className={s.detailsWrap}>
-        <p className={s.type}>{type}</p>
-        <p className={s.mileage}>{mileage} km</p>
+      <div className={s.detailsWrapLast}>
+        <div className={s.detailsWrap}>
+          <p className={s.detailItem}>{type}</p>
+          <p className={s.detailItem}>{mileageFormatted} km</p>
+        </div>
       </div>
-      <BtnAsLink adress={`/cars/${id}`}>Read more</BtnAsLink>
+      <Link to={`/cars/${id}`} className={clsx(s.link, 'mainLink')}>
+        Read more
+      </Link>
     </li>
   );
 };

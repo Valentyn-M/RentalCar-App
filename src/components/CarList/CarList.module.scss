@@ -1,0 +1,40 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: rem(48);
+  &:not(:last-child) {
+    margin-bottom: rem(52);
+  }
+
+  @media (min-width: rem(590)) {
+    &:not(:last-child) {
+      margin-bottom: rem(64);
+    }
+  }
+
+  @media (min-width: rem(890)) {
+    &:not(:last-child) {
+      margin-bottom: rem(80);
+    }
+  }
+}
+
+.button {
+  margin: 0 auto;
+  border: 1px solid var(--button);
+  background-color: unset;
+  color: var(--main);
+  transition: border-color 0.3s ease 0s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      border-color: var(--button-hover);
+      background-color: unset;
+    }
+  }
+  &:focus {
+    border-color: var(--button-hover);
+    background-color: unset;
+  }
+}

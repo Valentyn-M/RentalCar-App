@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux';
-import s from './CarList.module.css';
+import s from './CarList.module.scss';
 import { selectCars, selectCurrentPage, selectTotalPages } from '../../store/cars/selectors';
 import { useEffect, useState } from 'react';
 import { fetchCars } from '../../store/cars/operations';
 import { selectFilters } from '../../store/filters/selectors';
 import { setCurrentPage } from '../../store/cars/slice';
 import CarItem from '../CarItem/CarItem';
-import Button from '../Button/Button';
 import { useSearchParams } from 'react-router-dom';
 import { setFilters } from '../../store/filters/slice';
 import { useSnackbar } from 'notistack';
+import clsx from 'clsx';
 
 const CarList = () => {
   const cars = useSelector(selectCars);
@@ -55,12 +55,17 @@ const CarList = () => {
 
   return (
     <section className={s.carList}>
-      <ul>
+      <h2 className="visually-hidden">List of cars for rent</h2>
+      <ul className={s.list}>
         {cars.map((car) => (
           <CarItem key={car.id} carData={car} />
         ))}
       </ul>
-      {currentPage < totalPages && <Button onClick={handleClick}>Load more</Button>}
+      {currentPage < totalPages && (
+        <button type="button" className={clsx(s.button, 'mainBtn')} onClick={handleClick}>
+          Load more
+        </button>
+      )}
     </section>
   );
 };

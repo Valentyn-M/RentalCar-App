@@ -5,7 +5,6 @@ import { fetchCarBrands } from '../../store/carBrands/operations';
 import { selectCarBrands } from '../../store/carBrands/selectors';
 import { setFilters } from '../../store/filters/slice';
 import { resetCurrentPage, resetItems } from '../../store/cars/slice';
-import Button from '../Button/Button';
 import { useSearchParams } from 'react-router-dom';
 import clsx from 'clsx';
 import { NumericFormat } from 'react-number-format';
@@ -405,7 +404,9 @@ const CarFilter = () => {
           </div>
         </div>
 
-        <Button type="submit">Search</Button>
+        <button type="submit" className={clsx(s.button, 'mainBtn')}>
+          Search
+        </button>
       </form>
     </section>
   );
