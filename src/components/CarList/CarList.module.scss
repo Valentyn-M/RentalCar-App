@@ -1,6 +1,6 @@
 .list {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   row-gap: rem(48);
   &:not(:last-child) {
