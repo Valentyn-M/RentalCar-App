@@ -79,3 +79,66 @@
     background-color: var(--button-hover);
   }
 }
+
+.MuiPickersPopper-root {
+  .MuiPaper-root {
+    box-shadow: none;
+    border: rem(1) solid var(--button);
+    border-radius: rem(12);
+    padding: 0;
+    position: relative;
+    top: rem(8);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: rem(-7);
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: rem(12);
+      height: rem(12);
+      background: var(--white);
+      border-left: rem(1) solid var(--button);
+      border-top: rem(1) solid var(--button);
+      z-index: 1;
+    }
+  }
+}
+
+/* Стили для выбранной даты */
+.MuiPickersDay-root.Mui-selected {
+  background-color: var(--button) !important;
+  color: var(--white) !important;
+}
+
+/* Стрелки назад/вперёд */
+.MuiPickersCalendarHeader-root .MuiIconButton-root {
+  color: var(--button) !important;
+
+  &:hover {
+    background-color: rgba(33, 150, 243, 0.08); // лёгкий ховер — опционально
+  }
+}
+
+/* Сброс цвета иконки в выпадающем меню года/месяца */
+.MuiPickersCalendarHeader-label {
+  color: var(--main) !important;
+  font-weight: 600;
+}
+
+/* Выбранный ГОД в режиме выбора года */
+.MuiYearCalendar-root .Mui-selected {
+  background-color: var(--button) !important;
+  color: var(--white) !important;
+}
+
+.MuiDayCalendar-header {
+  border-bottom: 1px solid var(--button);
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+}
+
+.MuiFormHelperText-root.Mui-error {
+  color: red !important;
+  margin-top: rem(8);
+}

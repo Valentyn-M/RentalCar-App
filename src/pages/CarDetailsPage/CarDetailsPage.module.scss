@@ -32,9 +32,26 @@
   flex-basis: rem(488);
 }
 
-.image {
+.imageWrap {
+  position: relative;
+  padding-bottom: percent(512, 640);
   border-radius: rem(19);
+  overflow: hidden;
   &:not(:last-child) {
     margin-bottom: rem(40);
   }
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.loaderWrap {
+  width: 100%;
+  text-align: center;
 }

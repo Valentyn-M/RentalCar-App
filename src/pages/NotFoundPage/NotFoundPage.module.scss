@@ -1,0 +1,16 @@
+.notFoundPage {
+  text-align: center;
+  padding-top: rem(100);
+  padding-bottom: rem(100);
+}
+
+.title {
+  text-align: center;
+  color: red;
+  font-size: rem(36);
+  font-weight: 700;
+  line-height: 1.5;
+  &:not(:last-child) {
+    margin-bottom: rem(20);
+  }
+}

@@ -1,74 +1,101 @@
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import s from './BookingForm.module.scss';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useRef } from 'react';
 import { useSnackbar } from 'notistack';
 import clsx from 'clsx';
+import s from './BookingForm.module.scss';
+
+// Импорты для DatePicker
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 const BookingForm = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const btnRef = useRef(null);
 
   const initialValues = {
     name: '',
     email: '',
-    date: '',
+    date: null, // для DatePicker нужно значение null, а не ''
     comment: '',
-  };
-
-  const btnRef = useRef(null);
-
-  const handlSubmit = (values, actions) => {
-    console.log(values);
-
-    actions.resetForm();
-
-    enqueueSnackbar('Rental request sent!', { variant: 'success' });
-
-    if (btnRef.current) {
-      btnRef.current.blur();
-    }
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().min(3, 'Too short!').max(50, 'Too long!').required('Name is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
-    date: Yup.date().min(new Date(), 'Booking date must be in the future').required('Booking date is required'),
+    date: Yup.date().required('Booking date is required'),
     comment: Yup.string().max(500, 'Comment is too long'),
   });
+
+  const handleSubmit = (values, actions) => {
+    console.log(values);
+    actions.resetForm();
+    enqueueSnackbar('Rental request sent!', { variant: 'success' });
+    btnRef.current?.blur();
+  };
 
   return (
     <section className={s.bookingForm}>
       <h3 className={s.title}>Book your car now</h3>
       <p className={s.text}>Stay connected! We are always ready to help you.</p>
-      <Formik initialValues={initialValues} onSubmit={handlSubmit} validationSchema={validationSchema}>
-        <Form className={s.form}>
-          <label className={s.label} htmlFor="name">
-            <Field className={s.field} type="text" name="name" id="name" placeholder="Name*" />
-            <ErrorMessage className={s.error} name="name" component="span" />
-          </label>
-          <label className={s.label} htmlFor="email">
-            <Field className={s.field} type="email" name="email" id="email" placeholder="Email*" />
-            <ErrorMessage className={s.error} name="email" component="span" />
-          </label>
-          <label className={s.label} htmlFor="date">
-            <Field className={s.field} type="text" name="date" id="date" placeholder="Booking date*" />
-            <ErrorMessage className={s.error} name="date" component="span" />
-          </label>
-          <label className={s.label} htmlFor="comment">
-            <Field
-              as="textarea"
-              className={clsx(s.field, s.textarea)}
-              name="comment"
-              id="comment"
-              placeholder="Comment"
-            />
-            <ErrorMessage className={s.error} name="comment" component="span" />
-          </label>
-          <button type="submit" className={clsx(s.button, 'mainBtn')} ref={btnRef}>
-            Send
-          </button>
-        </Form>
-      </Formik>
+
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+          {({ values, setFieldValue, errors, touched }) => (
+            <Form className={s.form}>
+              <label className={s.label} htmlFor="name">
+                <Field className={s.field} type="text" name="name" id="name" placeholder="Name*" />
+                {touched.name && errors.name && <span className={s.error}>{errors.name}</span>}
+              </label>
+
+              <label className={s.label} htmlFor="email">
+                <Field className={s.field} type="email" name="email" id="email" placeholder="Email*" />
+                {touched.email && errors.email && <span className={s.error}>{errors.email}</span>}
+              </label>
+
+              {/* DatePicker */}
+              <DatePicker
+                value={values.date}
+                disablePast
+                onChange={(value) => setFieldValue('date', value)}
+                slotProps={{
+                  textField: {
+                    name: 'date',
+                    placeholder: 'Booking date*',
+                    fullWidth: true,
+                    variant: 'standard',
+                    InputProps: {
+                      disableUnderline: true,
+                      className: clsx(s.field, s.dateInput),
+                    },
+                    error: touched.date && Boolean(errors.date),
+                    helperText: touched.date && errors.date,
+                  },
+                  openPickerButton: {
+                    className: s.dateIcon,
+                  },
+                }}
+              />
+
+              <label className={s.label} htmlFor="comment">
+                <Field
+                  as="textarea"
+                  className={clsx(s.field, s.textarea)}
+                  name="comment"
+                  id="comment"
+                  placeholder="Comment"
+                />
+                {touched.comment && errors.comment && <span className={s.error}>{errors.comment}</span>}
+              </label>
+
+              <button type="submit" className={clsx(s.button, 'mainBtn')} ref={btnRef}>
+                Send
+              </button>
+            </Form>
+          )}
+        </Formik>
+      </LocalizationProvider>
     </section>
   );
 };

@@ -7,3 +7,7 @@ $fz: 16;
 @function em($indent, $currentSize) {
   @return calc(#{$indent} / #{$currentSize} * 1em);
 }
+
+@function percent($value1, $value2) {
+  @return calc($value1 / $value2) * 100%;
+}

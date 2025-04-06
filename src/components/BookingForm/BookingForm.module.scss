@@ -84,3 +84,36 @@
 .button {
   align-self: center;
 }
+
+.dateInput {
+  position: relative;
+
+  input::placeholder {
+    color: var(--gray);
+    opacity: 1;
+  }
+
+  .MuiInputBase-root {
+    display: flex;
+    align-items: center;
+  }
+
+  .dateIcon {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &:focus-within .dateIcon {
+    opacity: 1;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      box-shadow: inset 0 0 0 rem(1) var(--button-hover);
+    }
+  }
+
+  &:focus-within {
+    box-shadow: inset 0 0 0 rem(2) var(--button-hover);
+  }
+}
