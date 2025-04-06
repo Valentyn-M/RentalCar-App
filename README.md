@@ -53,8 +53,6 @@
 
 ## 📁 Project Structure
 
-### 🗂️ Project Structure
-
 ```bash
 src/
 ├── components/        # Reusable components (UI, Layout, Features)
