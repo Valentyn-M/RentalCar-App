@@ -1,3 +1,4 @@
+// Arrow for selects
 const SvgArrowIcon = (props) => {
   const svgIcon = '/sprite.svg';
   return (

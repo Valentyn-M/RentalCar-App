@@ -24,8 +24,6 @@ const CarItem = ({ carData }) => {
     dispatch(addOrRemoveFavorite(id));
   };
 
-  // TODO loader
-
   return (
     <li className={s.carItem}>
       <div className={s.imageWrap}>
