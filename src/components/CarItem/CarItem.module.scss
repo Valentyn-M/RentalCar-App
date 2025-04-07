@@ -26,6 +26,7 @@
   height: rem(268);
   width: 100%;
 }
+
 .icon {
   position: absolute;
   top: rem(16);
@@ -33,6 +34,7 @@
   width: rem(16);
   height: rem(16);
   fill: var(--badges);
+  cursor: pointer;
 
   &.active {
     fill: var(--button);
