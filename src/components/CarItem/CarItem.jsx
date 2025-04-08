@@ -27,9 +27,15 @@ const CarItem = ({ carData }) => {
   return (
     <li className={s.carItem}>
       <div className={s.imageWrap}>
-        <svg className={clsx(s.icon, isfavorite && s.active)} onClick={handleClick}>
-          {isfavorite ? <use href={`${svgIcon}#icon-heart-active`} /> : <use href={`${svgIcon}#icon-heart-default`} />}
-        </svg>
+        <button className={s.btnFavorite} type="button">
+          <svg className={clsx(s.icon, isfavorite && s.active)} onClick={handleClick}>
+            {isfavorite ? (
+              <use href={`${svgIcon}#icon-heart-active`} />
+            ) : (
+              <use href={`${svgIcon}#icon-heart-default`} />
+            )}
+          </svg>
+        </button>
         <img className={s.image} src={img} alt={description} width="335" height="268" />
       </div>
       <div className={s.titleWrap}>
